@@ -160,4 +160,83 @@ const heightFinder = (root, num) => {
   }
 };
 
-console.log(heightFinder(myTree, 1));
+// console.log(heightFinder(myTree, 1));
+
+// Is it a BST
+
+const treeCheck = tree => {
+  if (!tree) {
+    return false;
+  } else if (!tree.left && !tree.right) {
+    return true;
+  } else if (tree.value < tree.left || tree.value > tree.right) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+// console.log(treeCheck(myTree));
+
+// 3rd Largest node
+
+const third = tree => {
+  let myArray = [];
+  let currNode = tree;
+  if (currNode.right) {
+    myArray.push(currNode);
+    currNode = currNode.right;
+    third(currNode);
+  } else if (!currNode.right && currNode.left) {
+    myArray.push(currNode.left);
+    myArray.push(currNode);
+    return myArray[myArray.length - 2];
+  } else if (!currNode.right && !currNode.left) {
+    myArray.push(currNode);
+    return myArray[myArray.length - 2];
+  }
+};
+
+// console.log(third(myTree));
+
+// Balanced BST - Need to get the node with the min depth, and the node with the max depth and ensure their difference is not greater than 1
+
+// Can use height finder to find the max depth
+
+const balanced = tree => {
+  const max = heightFinder(tree);
+  const min = minDepth(tree);
+  if (tree == null) {
+    return false;
+  } else {
+    if (max - min <= 1) {
+      return true;
+    }
+  }
+};
+
+const minDepth = tree => {
+  if (tree == null) {
+    return 0;
+  } else {
+    return 1 + Math.min(minDepth(node.left), minDepth(node.right));
+  }
+};
+
+// Are they the same BST?
+
+const areSame = (arr1, arr2) => {
+  if (arr1[0] !== arr2[0]) {
+    return false;
+  } else if (arr1.length !== arr2.length) {
+    return false;
+  } else {
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr[i] !== arr[i]) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+};
